@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SebmGoogleMapMarker } from 'angular2-google-maps/core';
 
 @Component({
   selector: 'app-map',
