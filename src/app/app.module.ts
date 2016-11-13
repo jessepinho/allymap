@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCo4cwQvRqsIKzyEqkkXRSPpIu8KM-XCKk",
@@ -24,7 +25,8 @@ const firebaseAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    AuthenticateComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
