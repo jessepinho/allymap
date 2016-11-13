@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SebmGoogleMapMarker } from 'angular2-google-maps/core';
 
 @Component({
   selector: 'app-map',
@@ -7,7 +8,11 @@ import { Component } from '@angular/core';
 })
 export class MapComponent {
   // tslint:disable:no-unused-variable
-  private lat: number = 51.678418;
-  private lng: number = 7.809007;
+  private latitude: number = 51.678418;
+  private longitude: number = 7.809007;
+  private checkIns: ICheckIn[] = [
+    { latitude: 51.678418, longitude: 7.809007 },
+    { latitude: 52.678418, longitude: 7.209007 },
+  ];
   // tslint:enable:no-unused-variable
 }
