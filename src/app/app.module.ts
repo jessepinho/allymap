@@ -15,7 +15,7 @@ export const firebaseConfig = {
   authDomain: 'ally-map.firebaseapp.com',
   databaseURL: 'https://ally-map.firebaseio.com',
   storageBucket: 'ally-map.appspot.com',
-  messagingSenderId: '37098180673'
+  messagingSenderId: '37098180673',
 };
 
 const firebaseAuthConfig = {
@@ -27,7 +27,7 @@ const firebaseAuthConfig = {
   declarations: [
     AppComponent,
     MapComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -40,6 +40,6 @@ const firebaseAuthConfig = {
     MaterialModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

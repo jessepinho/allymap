@@ -4,7 +4,7 @@ import { AngularFire } from 'angularfire2';
 @Component({
   selector: 'app-authenticate',
   templateUrl: './authenticate.component.html',
-  styleUrls: ['./authenticate.component.css']
+  styleUrls: ['./authenticate.component.css'],
 })
 export class AuthenticateComponent {
   constructor(

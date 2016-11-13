@@ -7,7 +7,7 @@ describe('App: Allymap', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
       ],
     });
   });
