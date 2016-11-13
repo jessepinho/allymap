@@ -1,8 +1,19 @@
-<template [ngIf]="af.auth | async">
-  Welcome, {{(af.auth | async)?.auth.displayName}}
-  <button (click)="logOut()">Log out</button>
-</template>
+<div class="app-authenticate__wrap__md-card">
+  <md-card>
+    <template [ngIf]="af.auth | async">
+      <md-card-title>
+        Welcome, {{(af.auth | async)?.auth.displayName}}
+      </md-card-title>
+      <md-card-actions>
+        <button md-button (click)="logOut()">LOG OUT</button>
+      </md-card-actions>
+    </template>
 
-<template [ngIf]="!(af.auth | async)">
-  <button (click)="logIn()">Log in</button>
-</template>
+    <template [ngIf]="!(af.auth | async)">
+      <md-card-title>Welcome</md-card-title>
+      <md-card-actions>
+        <button md-button (click)="logIn()">LOG IN</button>
+      </md-card-actions>
+    </template>
+  </md-card>
+</div>
