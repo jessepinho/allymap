@@ -1,10 +1,18 @@
-<sebm-google-map [latitude]="latitude" [longitude]="longitude">
+<sebm-google-map
+  [latitude]="latitude"
+  [longitude]="longitude"
+  (mapClick)="handleMapClick()"
+  >
   <sebm-google-map-marker
-    *ngFor="let checkIn of checkIns"
-    [latitude]="checkIn.latitude"
-    [longitude]="checkIn.longitude"
+    *ngFor="let marker of markers; let index = index"
+    [latitude]="marker.latitude"
+    [longitude]="marker.longitude"
+    (markerClick)="handleMarkerClick(marker)"
     >
-    <sebm-google-map-info-window>
+    <sebm-google-map-info-window
+      [isOpen]="marker.isOpen"
+      (infoWindowClose)="handleInfoWindowClose(marker)"
+      >
       Hi, this is the content of the <strong>info window</strong>
     </sebm-google-map-info-window>
   </sebm-google-map-marker>
