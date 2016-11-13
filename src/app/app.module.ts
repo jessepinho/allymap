@@ -10,11 +10,11 @@ import { MapComponent } from './map/map.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyCo4cwQvRqsIKzyEqkkXRSPpIu8KM-XCKk",
-  authDomain: "ally-map.firebaseapp.com",
-  databaseURL: "https://ally-map.firebaseio.com",
-  storageBucket: "ally-map.appspot.com",
-  messagingSenderId: "37098180673"
+  apiKey: 'AIzaSyCo4cwQvRqsIKzyEqkkXRSPpIu8KM-XCKk',
+  authDomain: 'ally-map.firebaseapp.com',
+  databaseURL: 'https://ally-map.firebaseio.com',
+  storageBucket: 'ally-map.appspot.com',
+  messagingSenderId: '37098180673'
 };
 
 const firebaseAuthConfig = {

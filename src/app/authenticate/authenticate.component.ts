@@ -11,10 +11,12 @@ export class AuthenticateComponent {
     private af: AngularFire
   ) {}
 
+  // tslint:disable-next-line:no-unused-variable
   private logIn() {
     this.af.auth.login();
   }
 
+  // tslint:disable-next-line:no-unused-variable
   private logOut() {
     this.af.auth.logout();
   }
