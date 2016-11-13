@@ -1,9 +1,10 @@
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
@@ -35,7 +36,8 @@ const firebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MaterialModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
