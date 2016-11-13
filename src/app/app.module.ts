@@ -1,5 +1,5 @@
 import { AgmCoreModule } from 'angular2-google-maps/core';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,11 @@ export const firebaseConfig = {
   messagingSenderId: "37098180673"
 };
 
+const firebaseAuthConfig = {
+  provider: AuthProviders.Facebook,
+  method: AuthMethods.Redirect,
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +30,7 @@ export const firebaseConfig = {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCaHXS-FjKUymJzEjpl468Fkjd5EX3RYi4',
     }),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     BrowserModule,
     FormsModule,
     HttpModule
