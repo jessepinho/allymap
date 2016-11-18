@@ -20,7 +20,8 @@ export const firebaseConfig = {
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Facebook,
-  method: AuthMethods.Redirect,
+  method: AuthMethods.Popup,
+  scope: ['user_friends'],
 };
 
 @NgModule({
