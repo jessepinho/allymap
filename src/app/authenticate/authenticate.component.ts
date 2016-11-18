@@ -13,7 +13,9 @@ export class AuthenticateComponent {
 
   // tslint:disable-next-line:no-unused-variable
   private logIn() {
-    this.af.auth.login();
+    this.af.auth
+      .login()
+      .catch(console.error);
   }
 
   // tslint:disable-next-line:no-unused-variable
