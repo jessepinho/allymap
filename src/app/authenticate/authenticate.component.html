@@ -1,19 +1,27 @@
 <div class="app-authenticate__wrap__md-card">
   <md-card>
-    <template [ngIf]="af.auth | async">
-      <md-card-title>
-        Welcome, {{(af.auth | async)?.auth.displayName}}
-      </md-card-title>
-      <md-card-actions>
-        <button md-button (click)="logOut()">LOG OUT</button>
-      </md-card-actions>
+    <template [ngIf]="isAuthenticating">
+      <md-card-content><md-spinner></md-spinner></md-card-content>
     </template>
 
-    <template [ngIf]="!(af.auth | async)">
-      <md-card-title>Welcome</md-card-title>
-      <md-card-actions>
-        <button md-button (click)="logIn()">LOG IN</button>
-      </md-card-actions>
+    <template [ngIf]="!isAuthenticating">
+      <template [ngIf]="isAuthenticated">
+        <md-card-header>
+          <img md-card-avatar [src]="photoURL">
+          <md-card-title>Welcome, {{displayName}}</md-card-title>
+          <md-card-subtitle>{{email}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-actions>
+          <button md-button (click)="logOut()">LOG OUT</button>
+        </md-card-actions>
+      </template>
+
+      <template [ngIf]="!isAuthenticated">
+        <md-card-title>Welcome</md-card-title>
+        <md-card-actions>
+          <button md-button (click)="logIn()">LOG IN</button>
+        </md-card-actions>
+      </template>
     </template>
   </md-card>
 </div>
