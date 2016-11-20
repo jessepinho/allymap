@@ -49,6 +49,18 @@ export class AuthenticateComponent implements OnInit {
   private logIn() {
     this.af.auth
       .login()
+      .then((result) => {
+        const accessToken = result['facebook']['accessToken'];
+        FB.api('/me/friends', 'get', { access_token: accessToken }, (response) => {
+          FB.api(`/${response.data[0].id}`,
+                 'get',
+                 {
+                   fields: ['first_name', 'last_name', 'picture'],
+                   access_token: accessToken,
+                 },
+                 console.log);
+        });
+      })
       .catch(console.error);
   }
 
