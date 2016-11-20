@@ -1,2 +1,6 @@
 @import '~@angular/material/core/theming/prebuilt/indigo-pink.css';
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.u-hidden {
+  display: none !important;
+}

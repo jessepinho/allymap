@@ -1,5 +1,9 @@
 import { AngularFire } from 'angularfire2';
 import { Component, OnInit } from '@angular/core';
+import { NgRedux, select } from 'ng2-redux';
+import { Observable } from 'rxjs/Observable';
+
+import { USER_SET } from '../action-types';
 
 @Component({
   selector: 'app-authenticate',
@@ -7,36 +11,49 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./authenticate.component.css'],
 })
 export class AuthenticateComponent implements OnInit {
-  private displayName: string;
-  private email: string;
-  private isAuthenticated: boolean = false;
-  private isAuthenticating: boolean = false;
-  private photoURL: string;
+  // tslint:disable:no-unused-variable
+  @select(['user', 'displayName']) private displayName: Observable<string>;
+  @select(['user', 'email']) private email: Observable<string>;
+  @select(['user', 'isAuthenticated']) private isAuthenticated: Observable<boolean>;
+  @select(['user', 'isAuthenticating']) private isAuthenticating: Observable<boolean>;
+  @select(['user', 'photoURL']) private photoURL: Observable<string>;
+  // tslint:enable:no-unused-variable
 
   constructor(
-    private af: AngularFire
+    private af: AngularFire,
+    private ngRedux: NgRedux<IAppState>
   ) {}
 
   private authenticate() {
-    this.isAuthenticating = true;
+    this.setUser({
+      isAuthenticated: false,
+      isAuthenticating: true,
+    });
 
     this.af.auth
       .subscribe(
         (authState) => {
           if (authState) {
             const { auth: { displayName, email, photoURL } } = authState;
-            this.displayName = displayName;
-            this.email = email;
-            this.photoURL = photoURL;
-            this.isAuthenticated = true;
+            this.setUser({
+              isAuthenticated: true,
+              isAuthenticating: false,
+              displayName,
+              email,
+              photoURL,
+            });
           } else {
-            this.isAuthenticated = false;
+            this.setUser({
+              isAuthenticated: false,
+              isAuthenticating: false,
+            });
           }
-          this.isAuthenticating = false;
         },
         () => {
-          this.isAuthenticating = false;
-          this.isAuthenticated = false;
+          this.setUser({
+            isAuthenticated: false,
+            isAuthenticating: false,
+          });
         }
       );
   }
@@ -45,15 +62,20 @@ export class AuthenticateComponent implements OnInit {
     this.authenticate();
   }
 
-  // tslint:disable-next-line:no-unused-variable
-  private logIn() {
+  private logIn() { // tslint:disable-line:no-unused-variable
     this.af.auth
       .login()
       .catch(console.error);
   }
 
-  // tslint:disable-next-line:no-unused-variable
-  private logOut() {
+  private logOut() { // tslint:disable-line:no-unused-variable
     this.af.auth.logout();
+  }
+
+  private setUser(value: IUserState): void {
+    this.ngRedux.dispatch({
+      type: USER_SET,
+      value,
+    });
   }
 }

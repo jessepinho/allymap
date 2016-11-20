@@ -1,14 +1,17 @@
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { BrowserModule } from '@angular/platform-browser';
+import * as createLogger from 'redux-logger';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { NgModule } from '@angular/core';
+import { NgRedux, NgReduxModule } from 'ng2-redux';
 
 import { AppComponent } from './app.component';
-import { MapComponent } from './map/map.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { MapComponent } from './map/map.component';
+import { rootReducer } from  './reducers/root';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCo4cwQvRqsIKzyEqkkXRSPpIu8KM-XCKk',
@@ -39,8 +42,15 @@ const firebaseAuthConfig = {
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
+    NgReduxModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+  // TODO: Change `any` to IAppState once I can generate a valid initial state
+  // as the second argument.
+  constructor(ngRedux: NgRedux<any>) {
+    ngRedux.configureStore(rootReducer, {}, [createLogger()]);
+  }
+}
