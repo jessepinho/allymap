@@ -1,7 +1,7 @@
 import { AngularFire } from 'angularfire2';
 import { Component, OnInit } from '@angular/core';
-import { NgRedux, select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
 import { USER_SET } from '../action-types';
 
@@ -11,18 +11,22 @@ import { USER_SET } from '../action-types';
   styleUrls: ['./authenticate.component.css'],
 })
 export class AuthenticateComponent implements OnInit {
-  // tslint:disable:no-unused-variable
-  @select(['user', 'displayName']) private displayName: Observable<string>;
-  @select(['user', 'email']) private email: Observable<string>;
-  @select(['user', 'isAuthenticated']) private isAuthenticated: Observable<boolean>;
-  @select(['user', 'isAuthenticating']) private isAuthenticating: Observable<boolean>;
-  @select(['user', 'photoURL']) private photoURL: Observable<string>;
-  // tslint:enable:no-unused-variable
+  private displayName: Observable<string>;
+  private email: Observable<string>;
+  private isAuthenticated: Observable<boolean>;
+  private isAuthenticating: Observable<boolean>;
+  private photoURL: Observable<string>;
 
   constructor(
     private af: AngularFire,
-    private ngRedux: NgRedux<IAppState>
-  ) {}
+    private store: Store<IAppState>
+  ) {
+    this.displayName = store.select('user.displayName');
+    this.email = store.select('user.email');
+    this.isAuthenticated = store.select('user.isAuthenticated');
+    this.isAuthenticating = store.select('user.isAuthenticating');
+    this.photoURL = store.select('user.photoURL');
+  }
 
   private authenticate() {
     this.setUser({
@@ -72,10 +76,10 @@ export class AuthenticateComponent implements OnInit {
     this.af.auth.logout();
   }
 
-  private setUser(value: IUserState): void {
-    this.ngRedux.dispatch({
+  private setUser(payload: IUserState): void {
+    this.store.dispatch({
       type: USER_SET,
-      value,
+      payload,
     });
   }
 }

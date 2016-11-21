@@ -6,12 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { NgModule } from '@angular/core';
-import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { MapComponent } from './map/map.component';
-import { rootReducer } from  './reducers/root';
+import { store } from './reducers/store';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCo4cwQvRqsIKzyEqkkXRSPpIu8KM-XCKk',
@@ -42,7 +42,8 @@ const firebaseAuthConfig = {
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    NgReduxModule.forRoot(),
+    store,
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -50,7 +51,7 @@ const firebaseAuthConfig = {
 export class AppModule {
   // TODO: Change `any` to IAppState once I can generate a valid initial state
   // as the second argument.
-  constructor(ngRedux: NgRedux<any>) {
-    ngRedux.configureStore(rootReducer, {}, [createLogger()]);
-  }
+  // constructor(ngRedux: NgRedux<any>) {
+  //   ngRedux.configureStore(rootReducer, {}, [createLogger()]);
+  // }
 }
